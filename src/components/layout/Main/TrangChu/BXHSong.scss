@@ -1,0 +1,144 @@
+.BXH__Songs {
+  margin: 45px var(--p-25);
+  img {
+    width: 130px;
+    height: 120px;
+    border-radius: 4px;
+  }
+  .list__top-area {
+    margin: 0 -15px !important;
+    .top-area {
+      margin: 30px 0  65px 0;
+      border-radius: 4px;
+      position: relative;
+      .infor-top {
+        margin:0 !important;
+        position: relative;
+        background-size: cover;
+        border-radius: 10px;
+        height: 70%;
+        min-width: 270px;
+        background-image: url("https://stc-id.nixcdn.com/v12/static/media/bg_top_1.03d0fd3f.jpg") !important;
+        h3 {
+          padding: 20px 0;
+          text-transform: uppercase;
+          margin-left: 20px;
+          height: 50px;
+          overflow: hidden;
+        }
+        .top-background {
+          position: relative;
+          height: 90px;
+          top: 30px;
+          left: 15px;
+
+          .top-0 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+          }
+          .top-1 {
+            position: absolute;
+            top: 0;
+            left: 50px;
+            z-index: 2;
+          }
+          .top-2 {
+            position: absolute;
+            top: 0;
+            left: 100px;
+            z-index: 1;
+          }
+          .hoverActive,
+          .hoverActive1 {
+            z-index: 4;
+            display: block !important;
+            background: var(--bg-sp-color);
+          }
+        }
+        
+      }
+      .infor-text {
+        margin-top: 30px;
+        width: 100%;
+        overflow: hidden;
+        p {
+          text-align: left;
+          overflow: hidden;
+          padding-top: 0;
+        }
+      }
+    }
+  }
+}
+@media screen and(max-width:978px) {
+  .top-1 {
+    left: 40px !important;
+  }
+  .top-2 {
+    left: 80px !important;
+  }
+  h3 {
+    margin-left: 10px !important;
+  }
+  .infor-top {
+    margin-left: 10px !important;
+  }
+
+  button {
+    padding: 5px 10px !important;
+  }
+}
+@media screen and(max-width:768px) {
+  .BXH__Songs {
+    margin: 45px var(--p-15);
+    img {
+      width: 120px;
+      height: 120px;
+      
+    }
+    .top-area{
+      margin:10px 0 65px 0 !important;
+    }
+    
+    .top-1 {
+      left: 50px !important;
+    }
+    .top-2 {
+      left: 100px !important;
+    }
+    h3 {
+      margin-left: 10px !important;
+    }
+    .infor-top {
+      margin-left: 10px !important;
+    }
+  }
+}
+@media screen and(min-width:1560px) {
+  .BXH__Songs {
+    margin: 45px var(--p-25);
+    img {
+      width: 170px;
+      height: 170px;
+      
+    }
+    .infor-text{
+      margin-top:50px !important;
+      
+    }
+    .top-1 {
+      left: 70px !important;
+    }
+    .top-2 {
+      left: 140px !important;
+    }
+    h3 {
+      margin-left: 10px !important;
+    }
+    .infor-top {
+      margin-left: 10px !important;
+    }
+  }
+}

@@ -1,0 +1,102 @@
+
+.menu{
+  position: fixed;
+  width: 250px;
+  z-index: 9;
+  top:0;
+  left:0;
+  background: var(--bg-menu-color);
+  height:100vh;
+  &-header{
+    display:flex;
+    align-items: center;
+    height:50px;
+    margin:15px 10px;
+    img{
+      width: 50px;
+      height:40px;
+    }
+    h6  {
+      padding:20px 0 0 5px;
+    }
+  }
+  &-auth{
+    display:flex;
+    margin:10px;
+    padding:15px 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+
+    &-more{
+      width:100%;
+      display:flex;
+      position: relative;
+      .option-user{
+        padding:6px;
+        position:absolute;
+        right:-90px;
+        bottom:-40px;
+        background-color: var(--bg-listen-color);
+        border-radius:5px;
+      }
+      span{
+        margin-right:10px;
+        cursor: pointer;
+      }
+    }
+    svg{
+      cursor:pointer;
+    }
+  }
+  ul{
+    display:flex;
+    flex-direction: column;
+    a{
+      padding:10px 10px;
+      display:flex;
+      align-items:center;
+      
+      h6{
+        margin-left:15px;
+      }
+    }
+  }
+  .expand-menu{
+    position: absolute;
+    right:15px;
+    bottom:100px;
+    border-radius:50%;
+    border:1px solid var(--border-color);
+    padding:7px;
+    cursor: pointer;
+  }
+}
+
+
+@media screen and(max-width:992px) {
+  .menu-tablet{
+    width:60px;
+    overflow: hidden;
+    h6,span{
+      display:none;
+    }
+    .menu-auth-more,a{
+      display:flex;
+      justify-content: center;
+      
+    }
+    .moreForLogout{
+      display:none;
+    }
+  }
+}
+@media screen and(min-width:1560px) {
+  .menu{
+    width:350px;
+    a{
+      padding-top:15px !important; 
+      padding-bottom:15px !important;
+    }
+    
+  }
+}

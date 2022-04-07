@@ -1,0 +1,110 @@
+.main-search {
+  margin: 10px 25px;
+  .input-search {
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    margin: 0 -25px;
+    padding: 10px 25px 20px;
+    input {
+      background-color: var(--bg-main-color);
+      outline: none;
+      border: 1px solid var(--border-color);
+      padding: 7px 10px 7px 35px;
+      width: 50%;
+      border-radius: 5px;
+      color:#fff;
+    }
+    svg {
+      position: absolute;
+      top: 45%;
+      left: 30px;
+      transform: translateY(-50%);
+    }
+  }
+  .hot-search {
+    margin: 30px 0;
+    .list-hot-search {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      .hot-search-button {
+        background-color: var(--bg-sp-color);
+        display: flex;
+        align-items: center;
+        width: auto;
+        margin: 10px 20px 10px 0;
+        padding: 5px 10px;
+        outline: none;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        span {
+          color: turquoise;
+        }
+        h6 {
+          padding-left: 10px;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  .search-return {
+    .list-search-return {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .item-return {
+        background-color: var(--bg-sp-color);
+        width: 48%;
+        display: flex;
+        padding: 10px;
+        align-items: center;
+        margin: 10px 0;
+        cursor: pointer;
+        img {
+          width: 45px;
+          height: auto;
+          border-radius: 4px !important;
+          // padding:10px;
+        }
+        .infor-item-search {
+          margin-left: 15px;
+          h6 {
+            margin-bottom: 0;
+          }
+          p {
+            text-align: left;
+            margin-bottom: 0;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+  .search-history {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    .banner-search-history {
+      display: flex;
+      justify-content: space-between;
+      .remove-AllSearch {
+        cursor: pointer;
+      }
+    }
+    &-list {
+      button {
+        width: 100%;
+        background-color: var(--bg-sp-color);
+        outline: none;
+        display: flex;
+        justify-content: flex-start;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        margin: 5px 0;
+        span {
+          padding: 10px 0 10px 20px;
+          text-align: left;
+        }
+      }
+    }
+  }
+}

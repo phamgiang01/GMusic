@@ -1,0 +1,146 @@
+:root {
+  --border-color: rgba(244, 246, 248, 0.1);
+  --font-p-color: rgba(244, 246, 248, 0.55);
+  --font-text-color: rgba(244, 246, 248, 0.8);
+  --bg-menu-color: rgb(25, 25, 25);
+
+  --bg-main-color: rgba(35, 35, 35, 0.9);
+  --bg-main1-color: rgba(35, 35, 35, 0.7);
+  --bg-sp-color: rgba(244, 246, 248, 0.05);
+  --bg-sp1-color: rgba(255, 255, 255, 0.3);
+  --hover-color: rgba(0, 255, 255, 0.6);
+  --bg-listen-color: rgb(15, 15, 15);
+  --p-15: 15px;
+  --p-25: 25px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  svg{
+    cursor:pointer;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  li,
+  button,
+  a,
+  svg {
+    color: #edeeee;
+  }
+  li{
+    list-style: none;
+  }
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #999;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 10px;
+}
+a {
+  text-decoration: none !important;
+}
+h2 {
+  font-weight: 400;
+}
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400 !important;
+  margin-bottom:0 !important;
+}
+.row,.col{
+  margin:0 !important;
+  padding:0 !important;
+}
+li,
+a,
+span,
+p,
+svg {
+  font-weight: 300;
+}
+@media screen and(max-width:576px) {
+  h2 {
+    font-size: 23px !important;
+  }
+  h5{
+    font-size:18px !important;
+  }
+  p,span{
+    font-size:14px !important;
+  }
+}
+@media screen and(min-width:576px) {
+  h2 {
+    font-size: 21px !important;
+  }
+  h3,
+  h4,
+  h5 {
+    font-size: 20px;
+  }
+
+  svg {
+    font-size: 28px !important;
+  }
+  li,
+  a {
+    font-size: 15px;
+  }
+  h6,
+  span,
+  p {
+    font-size: 16px;
+  }
+}
+@media screen and(min-width:768px) {
+  h2{
+    font-size:25px !important;
+  }
+  h6 {
+    font-size: 18px !important;
+  }
+  svg {
+    font-size: 30px !important;
+  }
+}
+@media screen and(min-width:1200px) {
+  h2 {
+    font-size: 30px !important;
+  }
+  h6,
+  span,
+  p {
+    font-size: 17px !important;
+  }
+  svg {
+    font-size: 32px !important;
+  }
+}
+@media screen and(min-width:1560px) {
+  h2 {
+    font-size: 35px !important;
+  }
+  h6,
+  span,
+  p {
+    font-size: 25px !important;
+  }
+  svg {
+    font-size: 40px !important;
+  }
+}

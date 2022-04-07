@@ -1,0 +1,124 @@
+.new__release {
+  h2 {
+    padding-left: var(--p-25);
+  }
+  img {
+    border-radius: 10px;
+  }
+}
+
+.produce__song {
+  display: flex;
+  margin-top: 15px;
+  background-color: var(--bg-sp-color);
+  padding: var(--p-25);
+  a {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 200px;
+      height: auto;
+    }
+  }
+  .infor__song {
+    padding-left: 30px;
+    h6 {
+      margin: 0;
+    }
+    p {
+      text-align: left;
+      padding: 15px 0 10px;
+      margin: 0;
+    }
+    img {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 1px solid #fff;
+    }
+
+    span {
+      padding-left: 10px;
+      overflow: hidden;
+      height: 30px;
+    }
+  }
+}
+.list__song-release {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 40px;
+  .song-release {
+    margin: 10px;
+    position: relative;
+    img {
+      max-width: 100px;
+      height: auto;
+    }
+  }
+  .song-release:hover .mk__song-detailas {
+    opacity: 1;
+    visibility: visible;
+    cursor: pointer;
+  }
+}
+.mask__song-detail {
+  background-color: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 10px;
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+@media screen and(max-width:576px) {
+  .new__release {
+    h2,
+    .produce__song {
+      padding: var(--p-15);
+    }
+    .produce__song {
+      flex-direction: column;
+      text-align: center;
+      p {
+        display: flex;
+        justify-content: center;
+      }
+      .infor__song {
+        padding-left: 0;
+        margin-top: 15px;
+      }
+    }
+  }
+}
+@media screen and(min-width:1560px) {
+  .new__release {
+    margin-top: 50px;
+    .produce__song {
+      margin-top: 30px;
+      a {
+        img {
+          min-width: 300px !important;
+        }
+      }
+    }
+    list__song-release {
+      .song-release {
+        img {
+          max-width: 150px;
+        }
+      }
+    }
+  }
+}

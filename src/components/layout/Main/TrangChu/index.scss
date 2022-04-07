@@ -1,0 +1,25 @@
+.main {
+  min-height: 100vh;
+  position: absolute;
+  left: 250px;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  background-color: var(--bg-main-color);
+  overflow: hidden;
+}
+@media screen and(max-width:992px) {
+  .main {
+    left: 60px !important;
+  }
+}
+
+@media screen and(min-width:1560px) {
+  .main {
+    left: 350px !important;
+  }
+}
+.col-3,
+.col-6 {
+  padding: 0 !important;
+}

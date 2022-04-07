@@ -1,0 +1,47 @@
+.authentication{
+  position:fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  z-index:1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.1); 
+  .card{
+    width:450px;
+    position:relative;
+    border:none;
+    padding:20px;
+    .form-group{
+      margin-bottom:10px;
+    }
+    
+    h2{
+        text-align: center;
+        color:#333 !important;
+    }
+    p{
+      margin-bottom:0;
+      color:#333 !important;
+    }
+    p:hover{
+      color: turquoise !important;
+    }
+    span{
+      height:55px;
+      margin-top:2px;
+      display:flex;
+      align-items: center;
+    }
+    .close-form{
+      position: absolute;
+      top:15px;
+      right:15px;
+      
+      
+    }
+  }
+  
+}

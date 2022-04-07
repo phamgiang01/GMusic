@@ -1,0 +1,92 @@
+.profileUser{
+  margin-bottom:90px;
+  .backgroundUser{
+    position:relative;
+    display:flex;
+    justify-content: center;
+    margin:30px 0;
+    .imgUser{
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      img{
+        width:100px;
+        height:auto;
+      }
+      h3{
+        margin-top:10px;
+      }
+      
+    }
+    .extendUser{
+      position:absolute;
+      right:5%;
+      top:0;
+      span{
+        cursor:pointer;
+      }
+      
+    }
+  }
+  .listForUser{
+    display:flex;
+    justify-content: center;
+    margin-bottom:90px;
+    ul{
+      margin:0 25%;
+      width:100%;
+      border-radius:30px;
+      display:flex;
+      justify-content: space-around;
+      
+      background: var(--bg-sp-color);
+      padding:5px 0;
+      li{
+        list-style: none;
+        padding:5px 40px;
+        cursor: pointer;
+        
+      }
+      .active{
+        background:var(--bg-sp1-color);
+        border-radius:20px;
+      }
+    }
+  }
+}
+@media screen and(max-width:1200px){
+  .listForUser{
+    ul{
+      margin:0 15% !important;
+    }
+  }
+}
+@media screen and(max-width:992px){
+  .listForUser{
+    ul{
+      margin:0 10% !important;
+    }
+  }
+}
+@media screen and(max-width:768px){
+  .profileUser{
+    margin-bottom: 70px !important;
+  }
+}
+@media screen and(max-width:654px){
+  .listForUser{
+    ul{
+      margin:0 15%  !important;
+      flex-direction: column;
+      border-radius: 15px !important;
+    }
+  }
+}
+@media screen and(max-width:576px){
+  .listForUser{
+    ul{
+      margin:0 15px  !important;
+      
+    }
+  }
+}
