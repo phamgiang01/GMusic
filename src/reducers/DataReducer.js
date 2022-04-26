@@ -1,21 +1,21 @@
 export const DataReducer = (state, action) => {
   const {
     type,
-    payload: { keyAudio, listKey,indexKey }
+    payload: { audioChoose, listAudio,indexInList }
   } = action;
 
   switch (type) {
     case "SET_AUDIO":
       return {
         ...state,
-        keyAudio,
+        audioChoose,
       }
     case "SET_LIST_AUDIO":
       return{
         ...state,
-        keyAudio:listKey[indexKey],
-        listKey,
-        indexKey,
+        audioChoose:listAudio[indexInList],
+        listAudio,
+        indexInList,
       }
     default:
       return state;

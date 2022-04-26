@@ -14,7 +14,7 @@ const Login = () => {
   
   
   const userForm = { email, password };
-  console.log(userForm);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

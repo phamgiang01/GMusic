@@ -103,6 +103,12 @@
     .Control-Button-Group {
       display: flex;
       justify-content: center;
+      width:70%;
+      div{
+        display: flex;
+       justify-content: center;
+      }
+      
       .replayToggle{
         position: relative;
         span{
@@ -130,7 +136,7 @@
     justify-content: center;
   }
 }
-@media screen and(max-width:992px) {
+@media screen and(max-width:991px) {
   .listen {
     .volume {
       display: none;
@@ -144,7 +150,7 @@
     }
   }
 }
-@media screen and(max-width:576px) {
+@media screen and(max-width:575px) {
   .listen {
     .Song-Title {
       display: none !important;
@@ -154,7 +160,7 @@
     }
   }
 }
-@media screen and(max-width:576px) {
+@media screen and(max-width:575px) {
   .listen {
     .background__audio {
       padding: 0 0 0 10px !important;

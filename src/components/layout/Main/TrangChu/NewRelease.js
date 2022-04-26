@@ -9,7 +9,9 @@ const NewRelease = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { updateAudio } = useContext(DataContext);
   useEffect(() => {
+    
     NhacCuaTui.getHome().then((data) => setList(data.newRelease.song));
+
   }, []);
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -41,7 +43,7 @@ const NewRelease = () => {
               <p>
                 {list[currentIndex].artists.map((item, index) =>
                   item.imageUrl ? (
-                    <img src={item.imageUrl} alt="" key={index} />
+                    <img src={item.imageUrl} alt={item.name} key={index} />
                   ) : (
                     ""
                   )

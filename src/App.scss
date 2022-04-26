@@ -34,10 +34,20 @@
   a,
   svg {
     color: #edeeee;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
   }
   li{
     list-style: none;
   }
+  p{
+    margin-bottom:0 !important;
+  }
+}
+.col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7{
+  padding:0 !important ;
 }
 ::-webkit-scrollbar {
   width: 5px;
@@ -73,9 +83,9 @@ p,
 svg {
   font-weight: 300;
 }
-@media screen and(max-width:576px) {
+@media screen and(max-width:575px) {
   h2 {
-    font-size: 23px !important;
+    font-size: 20px !important;
   }
   h5{
     font-size:18px !important;
@@ -104,34 +114,36 @@ svg {
   h6,
   span,
   p {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
-@media screen and(min-width:768px) {
+@media screen and(min-width:765px) {
   h2{
-    font-size:25px !important;
+    font-size:22.5px !important;
   }
   h6 {
-    font-size: 18px !important;
+    font-size: 16px !important;
   }
   svg {
     font-size: 30px !important;
   }
 }
-@media screen and(min-width:1200px) {
+@media screen and(min-width:1199px) {
   h2 {
-    font-size: 30px !important;
+    font-size: 26px !important;
   }
   h6,
-  span,
   p {
-    font-size: 17px !important;
+    font-size: 15px !important;
+  }
+  span{
+    font-size:15px !important;
   }
   svg {
     font-size: 32px !important;
   }
 }
-@media screen and(min-width:1560px) {
+@media screen and(min-width:1559px) {
   h2 {
     font-size: 35px !important;
   }

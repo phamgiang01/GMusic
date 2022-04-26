@@ -19,14 +19,25 @@ import { AuthContext } from "../../../context/AuthContext";
 import { ProfileContext } from "../../../context/ProfileContext";
 import { Row, Col } from "react-bootstrap";
 import NhacCuaTui from "nhaccuatui-api-full";
-
 const Listen = () => {
-  const [audioChoose,setAudioChoose] = useState();
   
   const {
-    dataState: { keyAudio, listKey, indexKey },
+    dataState: { audioChoose, listAudio, indexInList },
     updateAudio,
   } = useContext(DataContext);
+  const [audioItem, setAudioItem] = useState();
+  useEffect(() => {
+    if(audioChoose?.key || audioChoose?.songKey){
+      audioChoose.key
+        ? NhacCuaTui.getSong(audioChoose.key).then((data) =>
+            setAudioItem(data.song)
+          )
+        : NhacCuaTui.getSong(audioChoose.songKey).then((data) =>
+            setAudioItem(data.song)
+          );
+    }
+    else setAudioItem(audioChoose)
+  }, [audioChoose]);
   const {
     authState: { user },
   } = useContext(AuthContext);
@@ -36,13 +47,6 @@ const Listen = () => {
     addToPlaylist,
     getArrPlaylist,
   } = useContext(ProfileContext);
-  useEffect(()=>{
-    if(keyAudio ){
-      keyAudio.key ? NhacCuaTui.getSong(keyAudio.key).then(data=>setAudioChoose(data.song)) 
-      : NhacCuaTui.getSong(keyAudio.songKey).then(data=>setAudioChoose(data.song))
-    }
-  },[keyAudio,indexKey])
-  // console.log(audioChoose)
   const [nameSearch, setNameSearch] = useState("");
   const audioRef = useRef();
   const [isPlay, setIsPlay] = useState(false);
@@ -57,18 +61,18 @@ const Listen = () => {
     return child.indexOf(nameSearch) > -1;
   });
   const handleAddToPlaylist = (item) => {
-    const newItem = { name: item, song: keyAudio };
+    const newItem = { name: item, song: audioItem };
     addToPlaylist(newItem);
   };
   useEffect(() => {
     if (user) getArrPlaylist();
   }, [user]);
   useEffect(() => {
-    if (keyAudio) {
+    if (audioChoose) {
       setIsPlay(true);
       audioRef.current.play();
     }
-  }, [keyAudio]);
+  }, [audioChoose]);
   const handleLoadedData = () => {
     setDuration(audioRef.current.duration);
     if (isPlay) audioRef.current.play();
@@ -88,7 +92,7 @@ const Listen = () => {
     setVolume(x);
   };
   const handlePausePlayClick = () => {
-    if (keyAudio !== "") {
+    if (audioItem !== "") {
       if (isPlay) {
         audioRef.current.pause();
       } else {
@@ -110,26 +114,39 @@ const Listen = () => {
       audioRef.current.volume = volmute / 100;
     }
   };
-  // console.log(audioChoose)
   return (
     <Row className="listen">
       <Col xs={3} sm={3} md={5} lg={4} xl={3} className="background__audio">
         <div className="infor-song">
-          <img src={audioChoose?.thumbnail} alt="" className="Song-Thumbnail" />
-          <div className="Song-Title">
-            <h6>{audioChoose?.title}</h6>
-            <p>{audioChoose?.artists.map((item, index) =>
-                  index < audioChoose.artists.length - 1 ? (
-                    <span key={index}>{item.name},</span>
-                  ) : (
-                    <span key={index}>{item.name}</span>
-                  )
-                )}</p>
-          </div>
+          {audioItem?.key !=null ? (
+            <>
+              <img src={audioItem?.thumbnail} alt="" className="Song-Thumbnail" />
+              <div className="Song-Title">
+                <h6>{audioItem?.title}</h6>
+                <p>
+                  {audioItem?.artists.map((item, index) =>
+                    index < audioItem.artists.length - 1 ? (
+                      <span key={index}>{item.name},</span>
+                    ) : (
+                      <span key={index}>{item.name}</span>
+                    )
+                  )}
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
+              <img src={audioItem?.avatar} alt="" className="Song-Thumbnail" />
+              <div className="Song-Title">
+                <h6>{audioItem?.title}</h6>
+                <p>{audioItem?.creator}</p>
+              </div>
+            </>
+          )}
         </div>
 
         <i style={{ position: "relative" }}>
-          {user && audioChoose ? (
+          {user && audioItem ? (
             <>
               <MoreVertIcon onClick={(e) => setShowOption(!showOption)} />
               {showOption ? (
@@ -158,7 +175,7 @@ const Listen = () => {
                     </div>
                   </div>
                   <div
-                    onClick={(e) => addToListSongLove(audioChoose)}
+                    onClick={(e) => addToListSongLove(audioItem)}
                     style={{ padding: "5px 10px", cursor: "pointer" }}
                   >
                     <PlaylistAddIcon />
@@ -183,8 +200,8 @@ const Listen = () => {
             xs={2}
             className="Prev-button"
             onClick={() => {
-              if (indexKey >= 1)
-                updateAudio(null, listKey, indexKey - 1);
+              if (indexInList >= 1)
+                updateAudio(null, listAudio, indexInList - 1);
             }}
           >
             <SkipPreviousIcon />
@@ -201,8 +218,8 @@ const Listen = () => {
             xs={2}
             className="Next-Button"
             onClick={() => {
-              if (indexKey < listKey.length - 1)
-                updateAudio(null, listKey, indexKey + 1);
+              if (indexInList < listAudio.length - 1)
+                updateAudio(null, listAudio, indexInList + 1);
             }}
           >
             <SkipNextIcon />
@@ -217,7 +234,7 @@ const Listen = () => {
         </Row>
         <audio
           ref={audioRef}
-          src={audioChoose?.streamUrls[0]?.streamUrl}
+          src={audioItem?.music ||audioItem?.streamUrls[0]?.streamUrl }
           onLoadedData={handleLoadedData}
           onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
           onEnded={() => {
@@ -225,8 +242,8 @@ const Listen = () => {
               setCurrentTime(0);
               audioRef.current.play();
             } else {
-              if (indexKey < listKey.length - 1)
-                updateAudio(null, listKey, indexKey + 1);
+              if (indexInList < listAudio.length - 1)
+                updateAudio(null, listAudio, indexInList + 1);
             }
           }}
         />

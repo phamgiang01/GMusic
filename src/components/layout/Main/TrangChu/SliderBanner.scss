@@ -1,31 +1,49 @@
 
 .slider__fake{
-  margin:  var(--p-25) var(--p-25) 0 ;
+  margin:  var(--p-25) var(--p-25) 60px ;
   .slick-next::before{
-    right:0;
+    display: none;
   }
   .slick-prev::before{
-    left:0;
+    display: none;
+  }
+  .slick-next,.slick-prev{
+    position: absolute;
+    z-index: 2;
+    overflow: hidden;
+    width:35px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background:#999;
+    border-radius: 5px;
+    justify-content: center;
+    svg{
+      color:#333;
+    }
+  }
+  img{
+    margin: 0 auto;
+    width:98%;
+    height:auto;
+    border-radius:5px;
   }
 }
 .slick-slide{
   padding:0 !important;
+  outline:none;
+
 }
 .slick-list{
+  outline:none;
   width:100%;
-}
-img{
-  width:100%;
-  height:auto;
-  border-radius:15px;
+  border-radius:5px;
+  left:50%;
+  transform: translateX(-50%) !important;
 }
 
-.slick-prev::before,.slick-next::before{
-  font-size:30px;
-  color:dark !important;
-  position:absolute;
-    z-index:2;
-}
+
+
 .slick-dots{
   bottom:-8.5%;
 }
@@ -37,7 +55,7 @@ img{
   color:var(--font-text-color)
 }
 
-@media screen and(max-width:768px) {
+@media screen and(max-width:767px) {
   .slick-dots li button:before{
     font-size:8px;
   }
@@ -51,28 +69,34 @@ img{
       border-radius:10px;
     }
   }
+  .slick-next,.slick-prev{
+    width:25px !important;
+    height:30px !important;
+  }
 }
-@media screen and(max-width:576px) {
+@media screen and(max-width:575px) {
   .slider__fake{
-  margin:  var(--p-15) var(--p-15) 0 ;
+  margin:  var(--p-15) var(--p-15) 0 !important;
     
     img{
       width:100%;
       height:180px !important;
       border-radius:10px;
     }
-    .slick-prev::before,.slick-next::before{
-      font-size:25px;
-     
-    }
+    // .slick-list{
+    //   padding:0 !important;
+    // }
+  }
+}
+@media screen and(max-width:978px) {
+  .slider__fake{
+    margin:  var(--p-15) var(--p-15) 45px ;
+
   }
 }
 @media screen and(min-width:1560px) {
 
-  .slick-prev::before,.slick-next::before{
-    font-size:45px;
-   
-  }
+  
   .slick-dots li button:before{
     font-size:18px;
   }

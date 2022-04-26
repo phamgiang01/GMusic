@@ -79,7 +79,7 @@ const Register = () => {
             </Form.Group>
 
             <Button type="submit" className="w-100 mt-4">
-              Register
+              Đăng kí
             </Button>
           </Form>
 

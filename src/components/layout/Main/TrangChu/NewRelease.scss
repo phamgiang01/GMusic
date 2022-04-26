@@ -1,4 +1,5 @@
 .new__release {
+  margin-top:50px;
   h2 {
     padding-left: var(--p-25);
   }
@@ -16,7 +17,7 @@
     display: flex;
     justify-content: center;
     img {
-      width: 200px;
+      width: 180px;
       height: auto;
     }
   }
@@ -30,17 +31,26 @@
       padding: 15px 0 10px;
       margin: 0;
     }
+    img:first-child{
+      left:0;
+    }
     img {
+      position: relative;
+      left:-5px;
       width: 25px;
       height: 25px;
       border-radius: 50%;
-      border: 1px solid #fff;
+      
     }
 
     span {
       padding-left: 10px;
       overflow: hidden;
       height: 30px;
+      font-size:14px !important;
+    }
+    svg{
+      font-size:25px !important;
     }
   }
 }

@@ -8,13 +8,13 @@
   background-color: var(--bg-main-color);
   overflow: hidden;
 }
-@media screen and(max-width:992px) {
+@media screen and(max-width:991px) {
   .main {
     left: 60px !important;
   }
 }
 
-@media screen and(min-width:1560px) {
+@media screen and(min-width:1559px) {
   .main {
     left: 350px !important;
   }

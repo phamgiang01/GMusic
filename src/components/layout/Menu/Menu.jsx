@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
@@ -20,6 +20,8 @@ import Register from "../../Auth/Register";
 import { AuthContext } from "../../../context/AuthContext";
 import { LOCAL_STORAGE_USER_ID } from "../../../context/constant";
 const Menu = () => {
+  const [urlActive,setUrlActive] = useState("")
+ 
   const {
     authState: { user },
     logoutUser,
@@ -36,9 +38,9 @@ const Menu = () => {
     logoutUser();
     setShowSetting(!showSetting);
   };
-  let isUnmounted = useRef(true);
+  const handleActive = () => {};
   useEffect(() => {
-    
+    let isUnmounted = false;
 
     function handleResize() {
       setMainWidth(window.innerWidth);
@@ -46,9 +48,15 @@ const Menu = () => {
     window.addEventListener("resize", handleResize);
     mainWidth > 1250 ? setShowExpand(true) : setShowExpand(false);
     return () => {
-      isUnmounted = false;
-    }
+      isUnmounted = true;
+    };
   }, [mainWidth]);
+  useEffect(()=>{
+    setUrlActive(window.location.pathname.slice(1))
+  }
+   
+  ,[])
+  console.log(urlActive)
   return (
     <div
       className={mainWidth < 992 && !showExpand ? "menu menu-tablet" : "menu"}
@@ -64,7 +72,7 @@ const Menu = () => {
         {user ? (
           <div className="menu-auth-more">
             <AccountCircleIcon />
-            <h6 style={{ margin : "5px 0 0 10px" }}>{user.username}</h6>
+            <h6 style={{ margin: "5px 0 0 10px" }}>{user.username}</h6>
             {user ? (
               <MoreVertOutlinedIcon
                 onClick={(e) => setShowSetting(!showSetting)}
@@ -103,27 +111,37 @@ const Menu = () => {
       <ul>
         {user ? (
           <Link to="/profile">
-            <LibraryMusicOutlinedIcon />
-            <h6> Cá nhân </h6>
+            <div className= {(urlActive=== "profile" ? "menu-active"  :" " )+ " menu-item"} onClick={(e)=>setUrlActive('profile')}>
+              <LibraryMusicOutlinedIcon />
+              <h6> Cá nhân </h6>
+            </div>
           </Link>
         ) : (
           ""
         )}
         <Link to="/">
-          <HomeOutlinedIcon />
-          <h6> Trang chủ</h6>
+          <div className= {(urlActive=== "" ? "menu-active"  :"" )+ " menu-item"} onClick={(e)=>setUrlActive('')}>
+            <HomeOutlinedIcon />
+            <h6> Trang chủ</h6>
+          </div>
         </Link>
         <Link to="/tim-kiem">
-          <SearchIcon />
-          <h6> Tìm kiếm</h6>
+          <div className= {(urlActive=== "tim-kiem" ? "menu-active"  :" " )+ " menu-item"} onClick={(e)=>setUrlActive('tim-kiem')}>
+            <SearchIcon />
+            <h6> Tìm kiếm</h6>
+          </div>
         </Link>
         <Link to="/kham_pha ">
-          <ExploreOutlinedIcon />
-          <h6> Khám phá</h6>
+          <div className= {(urlActive=== "kham_pha" ? "menu-active"  :" " )+ " menu-item"} onClick={(e)=>setUrlActive('kham_pha')}>
+            <ExploreOutlinedIcon />
+            <h6> Khám phá</h6>
+          </div>
         </Link>
         <Link to="/">
-          <EqualizerIcon />
-          <h6> BXH GMUSIC</h6>
+          <div className= {(urlActive=== "ChartTop" ? "menu-active"  :" " )+ " menu-item"} onClick={(e)=>setUrlActive('ChartTop')}>
+            <EqualizerIcon />
+            <h6> BXH GMUSIC</h6>
+          </div>
         </Link>
       </ul>
       {mainWidth < 992 && showExpand ? (

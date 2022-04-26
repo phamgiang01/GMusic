@@ -8,7 +8,7 @@
   .list__top-area {
     margin: 0 -15px !important;
     .top-area {
-      margin: 30px 0  65px 0;
+      margin: 15px 0  65px 0;
       border-radius: 4px;
       position: relative;
       .infor-top {
@@ -90,7 +90,7 @@
     padding: 5px 10px !important;
   }
 }
-@media screen and(max-width:768px) {
+@media screen and(max-width:767px) {
   .BXH__Songs {
     margin: 45px var(--p-15);
     img {

@@ -1,32 +1,34 @@
 import React from "react";
 import Slider from "react-slick";
-import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
+import NavigateBeforeOutlinedIcon from "@material-ui/icons/NavigateBeforeOutlined";
+import NavigateNextOutlinedIcon from "@material-ui/icons/NavigateNextOutlined";
 function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
+  const {  onClick } = props;
   return (
     <div
-      className={className}
-      style={{
-        ...style,
-        position: "absolute",
-        right: 0,
-        top: "40%",
-        zIndex: 9,
-      }}
+      className="slick-next pull-right"
+      style={{ right: 0 }}
       onClick={onClick}
-    />
+    >
+      <NavigateNextOutlinedIcon />
+    </div>
   );
 }
 
 function SamplePrevArrow(props) {
-  const { className, onClick } = props;
-  const divStyle = { position: "absolute", top: "40%", left: 0, zIndex: 9 };
-  return <div className={className} style={divStyle} onClick={onClick} />;
+  const {  onClick } = props;
+  return (
+    <div className="slick-prev pull-left" style={{ left: 0 }} onClick={onClick}>
+      <NavigateBeforeOutlinedIcon />
+    </div>
+  );
 }
 
 const SliderItem = (props) => {
+  const data = props.list;
   var settings = {
     infinite: false,
     speed: 500,
@@ -69,39 +71,38 @@ const SliderItem = (props) => {
       },
     ],
   };
-  return (
-    <div className="slider-item">
-      <h2> {props.title} </h2>
+
+  return(
+    <div className="slider-item" >
+      <h2> {data.groupName.split("_",1)} </h2>
       <Slider {...settings}>
-        {props.listItem.map((item,index) => (
-          <header  key={index}>
-          <nav className="item">
-            <Link to="/">
-              <img src={item.imgPath} alt="" />
-              <div className="item__mask">
-                <MoreVertIcon
-                  style={{
-                    position: "absolute",
-                    top: 5,
-                    right: 0,
-                    zIndex: 3,
-                    color: "#000",
-                  }}
-                />
-                <PlayCircleOutlineIcon className="item__mask-play" />
-              </div>
-            </Link>
+        {data.listPlaylist?.map((child, index) => (
+          <header key={index}>
+            <nav className="item">
+              <Link to={"/playlist/" + child.key}>
+                <img src={child.thumbnail} alt="" />
+                <div className="item__mask">
+                  <MoreVertIcon
+                    style={{
+                      position: "absolute",
+                      top: 5,
+                      right: 0,
+                      zIndex: 3,
+                      color: "#fff",
+                    }}
+                  />
+                  <PlayCircleFilledIcon className="item__mask-play" />
+                </div>
+              </Link>
             </nav>
             <Link to="/">
-              <h6>{item.title}</h6>
+              <h6>{child.title}</h6>
             </Link>
           </header>
-          
-          
         ))}
       </Slider>
     </div>
-  );
+  )
 };
 
 export default SliderItem;

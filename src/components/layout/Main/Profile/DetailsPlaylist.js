@@ -67,10 +67,30 @@ const DetailPlaylist = () => {
       <Row className="list-song">
         {list?.map((item, index) => (
           <div key={index} className="song-item">
-            <img src={item.avatar} alt="" onClick={() => updateAudio(item)} />
+            {(
+              <img src={item.avatar} alt="" onClick={() => updateAudio(item)} />
+            ) && (
+              <img
+                src={item.thumbnail}
+                alt=""
+                onClick={() => updateAudio(item)}
+              />
+            )}
             <div className="song-title">
-              <h6>{item.title}</h6>
-              <p>{item.creator}</p>
+              <h6>{item?.title}</h6>
+              {/* { */}
+                <p>{item?.creator}</p>  
+                {/* || */}
+                {/* <p>
+                  {item?.artists?.map((child, index) =>
+                    index < list?.artists?.length - 1 ? (
+                      <span key={index}>{child.name},</span>
+                    ) : (
+                      <span key={index}>{child.name}</span>
+                    )
+                  )}
+                </p> */}
+              {/* } */}
             </div>
             <MoreVertIcon onClick={() => handleSong(index)} />
             {showOption === index ? (

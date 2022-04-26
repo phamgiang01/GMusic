@@ -1,5 +1,5 @@
 .profileUser{
-  margin-bottom:90px;
+  margin-bottom:110px;
   .backgroundUser{
     position:relative;
     display:flex;
@@ -54,26 +54,22 @@
     }
   }
 }
-@media screen and(max-width:1200px){
+@media screen and(max-width:1199px){
   .listForUser{
     ul{
       margin:0 15% !important;
     }
   }
 }
-@media screen and(max-width:992px){
+@media screen and(max-width:991px){
   .listForUser{
     ul{
       margin:0 10% !important;
     }
   }
 }
-@media screen and(max-width:768px){
-  .profileUser{
-    margin-bottom: 70px !important;
-  }
-}
-@media screen and(max-width:654px){
+
+@media screen and(max-width:653px){
   .listForUser{
     ul{
       margin:0 15%  !important;
@@ -82,7 +78,7 @@
     }
   }
 }
-@media screen and(max-width:576px){
+@media screen and(max-width:575px){
   .listForUser{
     ul{
       margin:0 15px  !important;

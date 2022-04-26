@@ -13,6 +13,7 @@
     height:50px;
     margin:15px 10px;
     img{
+      border-radius:5px;
       width: 50px;
       height:40px;
     }
@@ -51,15 +52,18 @@
   ul{
     display:flex;
     flex-direction: column;
-    a{
-      padding:10px 10px;
-      display:flex;
-      align-items:center;
+   .menu-item{
+     width:100%;
+    padding:10px 15px;
+    display:flex;
+    align-items:center;
+    
       
       h6{
         margin-left:15px;
       }
-    }
+    
+   }
   }
   .expand-menu{
     position: absolute;
@@ -70,10 +74,23 @@
     padding:7px;
     cursor: pointer;
   }
+  .menu-active{
+    position: relative;
+    background-color: var(--border-color);
+    &::before{
+      content: '';
+      position: absolute;
+      top:0;
+      left:0;
+      width:3px;
+      height:100%;
+      background-color: aquamarine;
+    }
+  }
 }
 
 
-@media screen and(max-width:992px) {
+@media screen and(max-width:991px) {
   .menu-tablet{
     width:60px;
     overflow: hidden;

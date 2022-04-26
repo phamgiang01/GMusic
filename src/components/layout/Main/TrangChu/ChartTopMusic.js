@@ -21,57 +21,19 @@ const ChartTopMusic = () => {
     function handleResize() {
       setMainWidth(window.innerWidth);
     }
-    window.addEventListener("resize", handleResize());
+    window.addEventListener("resize", handleResize);
     return () => {
       isUnmounted = true;
     };
   }, [mainWidth, hour]);
   useEffect(() => {
     NhacCuaTui.getChart().then((data) => setList(data.ranking));
-   
   }, []);
-  
   return (
     <>
       <h2 style={{ marginLeft: 25 }}>Realtime GMusic</h2>
       <div className="chart__custom">
-        <div className="table">
-          {list?.song?.map((child, index) => (
-            <div
-              
-              onClick={() => updateAudio(null, list, index)}
-              key={index}
-            >
-              {index < 3 ? (
-                <Row key={index}>
-                  <Col xs={1} className={`index-${index} col-index`}>
-                    <span>{index + 1}</span>
-                  </Col>
-                  <Col xs={4} className="col-ava">
-                    <img src={child.thumbnail} alt="" />
-                  </Col>
-                  <Col xs={7} className="col-infor">
-                    <h6>{child.title}</h6>
-                    <p>
-                      {child.artists?.map((item) =>
-                        
-                          <span >{item.name}</span>
-                        
-                      )}
-                    </p>
-                  </Col>
-                </Row>
-              ) : (
-                <></>
-              )}
-            </div>
-          ))}
-          <Link to="/BXH-GMusic" className="expand-chart">
-            <span>Xem thêm</span>
-          </Link>
-        </div>
-
-        {mainWidth > 768 && list ? (
+        {mainWidth > 768 ? (
           <Line
             data={{
               labels: [
@@ -112,14 +74,14 @@ const ChartTopMusic = () => {
                   borderWidth: 2,
                 },
                 {
-                  data: [25, 27, 28, 30, 25, 26, 28, 25, 23, 27, 29, 28, 30],
+                  data: [27, 27, 28, 30, 29, 28, 28, 26, 28, 27, 29, 28, 30],
                   label: list?.song[1].title,
                   borderColor: "#8e5ea2",
                   fill: false,
                   borderWidth: 2,
                 },
                 {
-                  data: [17, 16, 19, 20, 22, 23, 21, 18, 19, 22, 23, 25, 21],
+                  data: [20, 21, 22, 25, 24, 23, 25, 24, 26, 22, 23, 25, 21],
                   label: list?.song[2].title,
                   borderColor: "#3cba9f",
                   fill: true,
@@ -194,6 +156,43 @@ const ChartTopMusic = () => {
             }}
           />
         )}
+        <div className="table">
+          {list?.song?.map((child, index) => (
+            <div
+              onClick={() => updateAudio(null, list?.song, index)}
+              key={index}
+            >
+              {index < 3 ? (
+                <Row key={index}>
+                  <Col xs={4} sm={3} md={2} className="col-ava">
+                    <div className={`index-${index} col-index`}>
+                      <span>{index + 1}</span>
+                    </div>
+                    <img src={child.thumbnail} alt="" />
+                  </Col>
+                  <Col xs={4} sm={4} md={5} className="col-title">
+                    <h6>{child.title}</h6>
+                  </Col>
+                  <Col xs={4} sm={4} className="col-artists">
+                    {child.artists?.map((item) =>
+                      item?.artistId !==
+                      child.artists[child.artists.length - 1]?.artistId ? (
+                        <span key={item.artistId}>{item.name},</span>
+                      ) : (
+                        <span key={item.artistId}>{item.name}</span>
+                      )
+                    )}
+                  </Col>
+                </Row>
+              ) : (
+                <></>
+              )}
+            </div>
+          ))}
+          <Link to="/BXH-GMusic" className="expand-chart">
+            <span>Xem thêm</span>
+          </Link>
+        </div>
       </div>
     </>
   );

@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import "./Profile.scss";
 import PlayList from "./PlayList";
 import { AuthContext } from "../../../../context/AuthContext";
 import DetailPlaylist from "./DetailsPlaylist";
-import Footer from "../Footer";
+
 const ProfileUser = () => {
   const [typeProfile, setTypeProfile] = useState("playlist");
   const {
