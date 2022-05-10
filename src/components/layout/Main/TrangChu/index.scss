@@ -14,9 +14,16 @@
   }
 }
 
-@media screen and(min-width:1559px) {
+@media screen and(min-width:1560px) {
   .main {
     left: 350px !important;
+    padding:0 25px;
+  }
+}
+@media screen and(min-width:2080px) {
+  .main {
+    left: 450px !important;
+    padding:0 50px;
   }
 }
 .col-3,

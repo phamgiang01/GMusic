@@ -79,9 +79,9 @@ const DetailPlaylist = () => {
             <div className="song-title">
               <h6>{item?.title}</h6>
               {/* { */}
-                <p>{item?.creator}</p>  
-                {/* || */}
-                {/* <p>
+              <p>{item?.creator}</p>
+              {/* || */}
+              {/* <p>
                   {item?.artists?.map((child, index) =>
                     index < list?.artists?.length - 1 ? (
                       <span key={index}>{child.name},</span>

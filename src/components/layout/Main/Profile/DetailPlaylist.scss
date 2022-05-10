@@ -7,18 +7,18 @@
   h2 {
     margin: 20px 0 0 30px;
   }
-  svg{
+  svg {
     position: absolute;
-    top:0;
-    right:0;
+    top: 0;
+    right: 0;
   }
-  p{
-    padding:10px 15px ;
+  p {
+    padding: 10px 15px;
     background-color: var(--bg-menu-color);
     position: absolute;
-    top:30px ;
-    right:10px;
-    cursor:pointer;
+    top: 30px;
+    right: 10px;
+    cursor: pointer;
   }
 }
 .list-song {
@@ -27,8 +27,8 @@
   justify-content: space-evenly;
   .song-item {
     background-color: var(--bg-sp-color);
-    width:48%;
-    margin:1%;
+    width: 48%;
+    margin: 1%;
     display: flex;
     padding: 10px;
     align-items: center;
@@ -40,7 +40,7 @@
       border-radius: 4px !important;
     }
     .song-title {
-      margin:0 15px ;
+      margin: 0 15px;
       overflow: hidden;
       h6 {
         margin-bottom: 0;
@@ -51,31 +51,29 @@
         padding: 0;
       }
     }
-    span{
-      position :absolute;
-      top:-20px;
-      right:-10px;
-      padding:10px 15px ;
-      background-color: var(--bg-menu-color);
-      border-radius:10px;
-    }
-    svg{
+    span {
       position: absolute;
-      top:50%;
+      top: -20px;
+      right: -10px;
+      padding: 10px 15px;
+      background-color: var(--bg-menu-color);
+      border-radius: 10px;
+    }
+    svg {
+      position: absolute;
+      top: 50%;
       transform: translateY(-50%);
-      right:10px;
+      right: 10px;
     }
   }
 }
 @media screen and(max-width:767px) {
   .list-song {
-    
-    .song-item{
-      width:100%;
+    .song-item {
+      width: 100%;
     }
   }
 }
-
 
 @media screen and(max-width:576px) {
   .title-Playlist {
@@ -84,6 +82,5 @@
   }
   .list-song {
     padding: var(--p-15) var(--p-15) 90px var(--p-15);
-    
   }
 }

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
@@ -19,7 +19,7 @@ const PlayList = () => {
   } = useContext(ProfileContext);
   const [showForm, setShowForm] = useState(false);
   const [namePlaylist, setNamePlaylist] = useState();
-  const navigate = useNavigate();
+  
   useEffect(() => {
     getArrPlaylist();
   }, []);

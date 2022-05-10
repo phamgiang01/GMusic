@@ -24,27 +24,28 @@ export const FormContextProvider = ({ children }) => {
 };
 export const DataContextProvider = ({ children }) => {
   const [dataState, dispatch] = useReducer(DataReducer, {
-    audioChoose: null,
-    listAudio: [],
-    indexInList:0
+    keyAudio: null,
+    listKey: [],
+    indexKey:0
   });
 
-  const updateAudio = (audioChoose, listAudio, indexInList) => {
-    if (audioChoose) {
+  const updateAudio = (keyAudio, listKey, indexKey) => {
+    if (keyAudio) {
       dispatch({
         type: "SET_AUDIO",
         payload: {
-          audioChoose
+          keyAudio
         },
       });
     }
-    if (!audioChoose) {
+    if (!keyAudio) {
+
       dispatch({
         type: "SET_LIST_AUDIO",
         payload: {
-          audioChoose,
-          listAudio,
-          indexInList,
+          keyAudio,
+          listKey ,
+          indexKey,
         },
       });
     }

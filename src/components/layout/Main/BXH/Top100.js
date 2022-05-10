@@ -1,7 +1,5 @@
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import { CallSongContext } from "../../../../context/CallSongContext";
-import { DataContext } from "../../../../context/DataContext";
+
+import React, {  useEffect, useState } from "react";
 import NhacCuaTui from "nhaccuatui-api-full";
 
 const BXH = () => {

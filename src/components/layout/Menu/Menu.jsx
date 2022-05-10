@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
-import HeadsetOutlinedIcon from "@material-ui/icons/HeadsetOutlined";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import LibraryMusicOutlinedIcon from "@material-ui/icons/LibraryMusicOutlined";
@@ -18,10 +17,9 @@ import Login from "../../Auth/Login";
 import ForgotPassword from "../../Auth/ForgotPassword";
 import Register from "../../Auth/Register";
 import { AuthContext } from "../../../context/AuthContext";
-import { LOCAL_STORAGE_USER_ID } from "../../../context/constant";
 const Menu = () => {
-  const [urlActive,setUrlActive] = useState("")
- 
+  const [urlActive, setUrlActive] = useState("");
+
   const {
     authState: { user },
     logoutUser,
@@ -51,12 +49,9 @@ const Menu = () => {
       isUnmounted = true;
     };
   }, [mainWidth]);
-  useEffect(()=>{
-    setUrlActive(window.location.pathname.slice(1))
-  }
-   
-  ,[])
-  console.log(urlActive)
+  useEffect(() => {
+    setUrlActive(window.location.pathname.slice(1));
+  }, []);
   return (
     <div
       className={mainWidth < 992 && !showExpand ? "menu menu-tablet" : "menu"}
@@ -111,7 +106,12 @@ const Menu = () => {
       <ul>
         {user ? (
           <Link to="/profile">
-            <div className= {(urlActive=== "profile" ? "menu-active"  :" " )+ " menu-item"} onClick={(e)=>setUrlActive('profile')}>
+            <div
+              className={
+                (urlActive === "profile" ? "menu-active" : " ") + " menu-item"
+              }
+              onClick={(e) => setUrlActive("profile")}
+            >
               <LibraryMusicOutlinedIcon />
               <h6> Cá nhân </h6>
             </div>
@@ -120,25 +120,43 @@ const Menu = () => {
           ""
         )}
         <Link to="/">
-          <div className= {(urlActive=== "" ? "menu-active"  :"" )+ " menu-item"} onClick={(e)=>setUrlActive('')}>
+          <div
+            className={(urlActive === "" ? "menu-active" : "") + " menu-item"}
+            onClick={(e) => setUrlActive("")}
+          >
             <HomeOutlinedIcon />
             <h6> Trang chủ</h6>
           </div>
         </Link>
         <Link to="/tim-kiem">
-          <div className= {(urlActive=== "tim-kiem" ? "menu-active"  :" " )+ " menu-item"} onClick={(e)=>setUrlActive('tim-kiem')}>
+          <div
+            className={
+              (urlActive === "tim-kiem" ? "menu-active" : " ") + " menu-item"
+            }
+            onClick={(e) => setUrlActive("tim-kiem")}
+          >
             <SearchIcon />
             <h6> Tìm kiếm</h6>
           </div>
         </Link>
         <Link to="/kham_pha ">
-          <div className= {(urlActive=== "kham_pha" ? "menu-active"  :" " )+ " menu-item"} onClick={(e)=>setUrlActive('kham_pha')}>
+          <div
+            className={
+              (urlActive === "kham_pha" ? "menu-active" : " ") + " menu-item"
+            }
+            onClick={(e) => setUrlActive("kham_pha")}
+          >
             <ExploreOutlinedIcon />
             <h6> Khám phá</h6>
           </div>
         </Link>
-        <Link to="/">
-          <div className= {(urlActive=== "ChartTop" ? "menu-active"  :" " )+ " menu-item"} onClick={(e)=>setUrlActive('ChartTop')}>
+        <Link to="/BXH-GMusic/nhac-viet">
+          <div
+            className={
+              (urlActive === "ChartTop" ? "menu-active" : " ") + " menu-item"
+            }
+            onClick={(e) => setUrlActive("ChartTop")}
+          >
             <EqualizerIcon />
             <h6> BXH GMUSIC</h6>
           </div>

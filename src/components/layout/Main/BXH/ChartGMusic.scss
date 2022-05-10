@@ -1,44 +1,122 @@
 .Chart-Category{
-  margin: var(--p-25);
+  margin:15px  var(--p-25);
 }
 .Chart-weekly{
+  
+
   .list-category{
+    display:flex;
+    justify-content: center;
+    gap:20px;
+    
     p{
       padding:5px 15px;
+      position:relative;
+      padding:10px 0;
+      cursor: pointer;
     }
   }
   .weekly-item{
     .layout-time{
+      margin: 15px var(--p-25);
       display:flex;
       align-items:center;
+      h2{
+        margin-bottom: 0 !important;
+      }
     }
     .top1-weekly{
+      padding:25px !important;
       display:flex;
+      background-color: var(--bg-sp-color);
+      gap:30px;
+      img{
+        border-radius: 10px;
+        max-width:220px;
+      }
       .infor-top{
         &-title{
+          display: flex;
+          gap:10px;
 
         }
         &-singer{
+          margin:10px 0;
+          display: flex;
+          gap:10px;
+          align-items: center;
+          img:first-child{
+            left:0;
+          }
           img{
-            width:60px;
-            height:60px;
-            left:-25%;
+            position: relative;
+            left:-15px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
           }
         }
         &-status{
           display:flex;
+          
+          gap:20px;
+          span{
+            font-size:30px  !important;
+            font-weight: 500;
+          }
+          .status-last{
+            span{
+              color:#FFC40E;
+            }
+          }
+          .status-max{
+            span{
+              color:#2DAAED;
+            }
+          }
+          .status-range{
+            span{
+              color:#95D96D;
+            }
+          }
         }
       }
       
     }
+    .run-all{
+      margin: 15px 25px;
+     p{
+      padding:7px 30px;
+      border-radius: 100px;
+      background-color: var(--bg-sp-color);
+      display: inline-block;
+      border: 1px solid var(--border-color);
+     }
+    }
     .list-weekly{
+      padding:10px 25px ;
+      background-image: linear-gradient(#28363b,#363434);
       &-item{
+        border-bottom: 1px solid var(--bg-sp-color);
         display:flex;
         align-items: center;
-        .infor-item{
-          display:flex;
+        gap:10px;
+        padding:10px 0 !important;
+        span{
+          width:30px;
         }
+        .infor-item{
+          
+          display:flex;
+          gap:10px;
+          img{
+            width:50px;
+            border-radius: 5px;
+          }
+        }
+      }
+      &-item:last-child{
+        border-bottom: none;
       }
     }
   }

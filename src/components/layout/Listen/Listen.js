@@ -19,25 +19,16 @@ import { AuthContext } from "../../../context/AuthContext";
 import { ProfileContext } from "../../../context/ProfileContext";
 import { Row, Col } from "react-bootstrap";
 import NhacCuaTui from "nhaccuatui-api-full";
+import AlertMessage from "../AlertMessage";
 const Listen = () => {
-  
+  const songOld = JSON.parse(localStorage.getItem("song-id"));
+  const [audioChoose, setAudioChoose] = useState();
+  const [checkTypeAudio, setCheckTypeAudio] = useState(false);
+
   const {
-    dataState: { audioChoose, listAudio, indexInList },
+    dataState: { keyAudio, listKey, indexKey },
     updateAudio,
   } = useContext(DataContext);
-  const [audioItem, setAudioItem] = useState();
-  useEffect(() => {
-    if(audioChoose?.key || audioChoose?.songKey){
-      audioChoose.key
-        ? NhacCuaTui.getSong(audioChoose.key).then((data) =>
-            setAudioItem(data.song)
-          )
-        : NhacCuaTui.getSong(audioChoose.songKey).then((data) =>
-            setAudioItem(data.song)
-          );
-    }
-    else setAudioItem(audioChoose)
-  }, [audioChoose]);
   const {
     authState: { user },
   } = useContext(AuthContext);
@@ -47,6 +38,38 @@ const Listen = () => {
     addToPlaylist,
     getArrPlaylist,
   } = useContext(ProfileContext);
+  useEffect(() => {
+    localStorage.setItem("song-id", JSON.stringify(""));
+    if (!keyAudio) {
+      NhacCuaTui.getSong(songOld).then((data) => {
+        data?.song?.streamUrls.length > 0
+          ? setAudioChoose(data.song)
+          : setAudioChoose();
+      });
+      setCheckTypeAudio(true);
+
+      localStorage.setItem("song-id", JSON.stringify(songOld));
+    } else {
+      setCheckTypeAudio(false);
+      keyAudio.key
+        ? NhacCuaTui.getSong(keyAudio.key).then((data) => {
+            data.song.streamUrls.length > 0
+              ? setAudioChoose(data.song)
+              : setAudioChoose();
+          })
+        : NhacCuaTui.getSong(keyAudio.songKey).then((data) => {
+            data.song.streamUrls.length > 0
+              ? setAudioChoose(data.song)
+              : setAudioChoose();
+          });
+
+      if (keyAudio.key)
+        localStorage.setItem("song-id", JSON.stringify(keyAudio?.key));
+      if (keyAudio.songKey)
+        localStorage.setItem("song-id", JSON.stringify(keyAudio?.songKey));
+    }
+  }, [keyAudio, indexKey]);
+
   const [nameSearch, setNameSearch] = useState("");
   const audioRef = useRef();
   const [isPlay, setIsPlay] = useState(false);
@@ -61,16 +84,19 @@ const Listen = () => {
     return child.indexOf(nameSearch) > -1;
   });
   const handleAddToPlaylist = (item) => {
-    const newItem = { name: item, song: audioItem };
+    const newItem = { name: item, song: keyAudio };
     addToPlaylist(newItem);
   };
   useEffect(() => {
     if (user) getArrPlaylist();
   }, [user]);
   useEffect(() => {
-    if (audioChoose) {
+    if (audioChoose && !checkTypeAudio) {
       setIsPlay(true);
-      audioRef.current.play();
+      audioRef?.current?.play();
+    } else {
+      setIsPlay(false);
+      audioRef?.current?.pause();
     }
   }, [audioChoose]);
   const handleLoadedData = () => {
@@ -92,11 +118,11 @@ const Listen = () => {
     setVolume(x);
   };
   const handlePausePlayClick = () => {
-    if (audioItem !== "") {
+    if (audioChoose) {
       if (isPlay) {
-        audioRef.current.pause();
+        audioRef.current?.pause();
       } else {
-        audioRef.current.play();
+        audioRef.current?.play();
       }
       setIsPlay(!isPlay);
     }
@@ -114,39 +140,45 @@ const Listen = () => {
       audioRef.current.volume = volmute / 100;
     }
   };
+
   return (
     <Row className="listen">
       <Col xs={3} sm={3} md={5} lg={4} xl={3} className="background__audio">
-        <div className="infor-song">
-          {audioItem?.key !=null ? (
-            <>
-              <img src={audioItem?.thumbnail} alt="" className="Song-Thumbnail" />
-              <div className="Song-Title">
-                <h6>{audioItem?.title}</h6>
-                <p>
-                  {audioItem?.artists.map((item, index) =>
-                    index < audioItem.artists.length - 1 ? (
-                      <span key={index}>{item.name},</span>
-                    ) : (
-                      <span key={index}>{item.name}</span>
-                    )
-                  )}
-                </p>
-              </div>
-            </>
-          ) : (
-            <>
-              <img src={audioItem?.avatar} alt="" className="Song-Thumbnail" />
-              <div className="Song-Title">
-                <h6>{audioItem?.title}</h6>
-                <p>{audioItem?.creator}</p>
-              </div>
-            </>
-          )}
-        </div>
+        {audioChoose ? (
+          <div className="infor-song">
+            {audioChoose.thumbnail ? (
+              <img
+                src={audioChoose.thumbnail}
+                alt=""
+                className="Song-Thumbnail"
+              />
+            ) : (
+              <img
+                style={{ maxWidth: 300 }}
+                src="https://stc-id.nixcdn.com/v12/static/media/default_song_no_cover.a876da66.png"
+                alt=""
+                className="Song-Thumbnail"
+              />
+            )}
+            <div className="Song-Title">
+              <h6>{audioChoose.title}</h6>
+              <p>
+                {audioChoose.artists.map((item, index) =>
+                  index < audioChoose.artists.length - 1 ? (
+                    <span key={index}>{item.name},</span>
+                  ) : (
+                    <span key={index}>{item.name}</span>
+                  )
+                )}
+              </p>
+            </div>
+          </div>
+        ) : (
+          <img src="" alt="" className="Song-Thumbnail" />
+        )}
 
         <i style={{ position: "relative" }}>
-          {user && audioItem ? (
+          {user && audioChoose ? (
             <>
               <MoreVertIcon onClick={(e) => setShowOption(!showOption)} />
               {showOption ? (
@@ -175,7 +207,7 @@ const Listen = () => {
                     </div>
                   </div>
                   <div
-                    onClick={(e) => addToListSongLove(audioItem)}
+                    onClick={(e) => addToListSongLove(audioChoose)}
                     style={{ padding: "5px 10px", cursor: "pointer" }}
                   >
                     <PlaylistAddIcon />
@@ -200,8 +232,7 @@ const Listen = () => {
             xs={2}
             className="Prev-button"
             onClick={() => {
-              if (indexInList >= 1)
-                updateAudio(null, listAudio, indexInList - 1);
+              if (indexKey >= 1) updateAudio(null, listKey, indexKey - 1);
             }}
           >
             <SkipPreviousIcon />
@@ -218,8 +249,8 @@ const Listen = () => {
             xs={2}
             className="Next-Button"
             onClick={() => {
-              if (indexInList < listAudio.length - 1)
-                updateAudio(null, listAudio, indexInList + 1);
+              if (indexKey < listKey.length - 1)
+                updateAudio(null, listKey, indexKey + 1);
             }}
           >
             <SkipNextIcon />
@@ -232,35 +263,43 @@ const Listen = () => {
             )}
           </Col>
         </Row>
-        <audio
-          ref={audioRef}
-          src={audioItem?.music ||audioItem?.streamUrls[0]?.streamUrl }
-          onLoadedData={handleLoadedData}
-          onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
-          onEnded={() => {
-            if (isReplay) {
-              setCurrentTime(0);
-              audioRef.current.play();
-            } else {
-              if (indexInList < listAudio.length - 1)
-                updateAudio(null, listAudio, indexInList + 1);
-            }
-          }}
-        />
+        {audioChoose ? (
+          <audio
+            ref={audioRef}
+            src={audioChoose?.streamUrls[0]?.streamUrl}
+            onLoadedData={handleLoadedData}
+            onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
+            onEnded={() => {
+              if (isReplay) {
+                setCurrentTime(0);
+                audioRef.current.play();
+              } else {
+                if (indexKey < listKey.length - 1)
+                  updateAudio(null, listKey, indexKey + 1);
+              }
+            }}
+          />
+        ) : (
+          ""
+        )}
         <div className="time__slider">
-          <p>
-            {Math.floor(currentTime / 60) < 10 ? (
-              <span>0{Math.floor(currentTime / 60)}</span>
-            ) : (
-              <span>{Math.floor(currentTime / 60)}</span>
-            )}
-            :
-            {Math.floor(currentTime % 60) < 10 ? (
-              <span>0{Math.floor(currentTime % 60)}</span>
-            ) : (
-              <span>{Math.floor(currentTime % 60)}</span>
-            )}
-          </p>
+          {audioChoose ? (
+            <p>
+              {Math.floor(currentTime / 60) < 10 ? (
+                <span>0{Math.floor(currentTime / 60)}</span>
+              ) : (
+                <span>{Math.floor(currentTime / 60)}</span>
+              )}
+              :
+              {Math.floor(currentTime % 60) < 10 ? (
+                <span>0{Math.floor(currentTime % 60)}</span>
+              ) : (
+                <span>{Math.floor(currentTime % 60)}</span>
+              )}
+            </p>
+          ) : (
+            <p>00:00</p>
+          )}
 
           <TimeSlider
             axis="x"
@@ -285,19 +324,7 @@ const Listen = () => {
               },
             }}
           />
-          <p>
-            {Math.floor(duration / 60) < 10 ? (
-              <span>0{Math.floor(duration / 60)}</span>
-            ) : (
-              <span>{Math.floor(duration / 60)}</span>
-            )}
-            :
-            {Math.floor(duration % 60) < 10 ? (
-              <span>0{Math.floor(duration % 60)}</span>
-            ) : (
-              <span>{Math.floor(duration % 60)}</span>
-            )}
-          </p>
+          {audioChoose ? <p>{audioChoose.duration}</p> : <p>00:00</p>}
         </div>
       </Col>
 

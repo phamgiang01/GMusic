@@ -22,49 +22,45 @@
       padding: 0 !important;
       display: flex;
       align-items: center;
-      
     }
-    .col-ava{
+    .col-ava {
       justify-content: space-evenly;
     }
     .col-title {
-      
-      
-      display: flex;
-      flex-direction: flex-start;
-      h6{
+      h6 {
         text-overflow: ellipsis;
         overflow: hidden;
-        
-        white-space: nowrap; 
+
+        white-space: nowrap;
+        padding: 0 5px;
       }
     }
     img {
       width: 90px;
-      padding:10px;
+      padding: 10px;
       border-radius: 10px;
     }
-    .col-artists{
-      padding :0 7px !important;
+    .col-artists {
+      padding: 0 7px !important;
       display: flex;
       flex-direction: flex-start;
-      
+
       overflow: hidden;
-      white-space: nowrap; 
+      white-space: nowrap;
       text-overflow: ellipsis;
-        span:last-child{
-          text-overflow: ellipsis;
-          overflow: hidden;
-          
-          white-space: nowrap; 
-        }
+      span:last-child {
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        white-space: nowrap;
+      }
     }
     .col-index {
       display: flex;
       justify-content: center;
       overflow: hidden;
-      span{
-        font-size:30px !important;
+      span {
+        font-size: 30px !important;
         font-weight: 500;
       }
     }
@@ -78,7 +74,7 @@
       color: #3cba9f;
     }
     .expand-chart {
-      padding: 15px ;
+      padding: 15px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -94,21 +90,25 @@
   }
 }
 
-@media screen and(max-width:576px) {
+@media screen and(max-width:575px) {
   .chart__custom {
     margin: var(--p-15) !important;
     canvas {
       height: 400px !important;
     }
-    .table{
-      .col-ava{
-        img{
-          width:50px !important;
-          height:70px !important;
-          padding:10px 0 !important;
+    .table {
+      .col-ava {
+        img {
+          width: 50px !important;
+          height: 70px !important;
+          padding: 10px 0 !important;
+        }
+      }
+      .expand-chart {
+        span {
+          font-size: 16px !important;
         }
       }
     }
   }
 }
-

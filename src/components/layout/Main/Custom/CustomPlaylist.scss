@@ -1,11 +1,8 @@
+
 .custom__playlist {
   background-image: linear-gradient(#1B2B31,#121212);
   padding: var(--p-25);
-  .col-6,.col-5{
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
-  }
+  
   .top__playlist {
     display: flex;
     
@@ -92,11 +89,19 @@
     }
     &-item{
       padding:7px 0 !important;
+      span{
+        width:25px;
+      }
       img{
         width:45px;
+        border-radius: 5px;
       }
       p{
         font-weight:400;
+        overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+
       }
     }
     

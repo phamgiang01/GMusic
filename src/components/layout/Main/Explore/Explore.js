@@ -1,64 +1,170 @@
-import React, { useContext, useState } from "react";
-import { CallSongContext } from "../../../../context/CallSongContext";
+import React, { useContext, useEffect, useState } from "react";
+import { Row, Col } from "react-bootstrap";
 import "./Explore.scss";
+import Footer from "../Footer";
+import NhacCuaTui from "nhaccuatui-api-full";
 import { DataContext } from "../../../../context/DataContext";
-import {Row,Col} from 'react-bootstrap'
-import Footer from "../Footer"
+import { ExploreJson } from "../storeMain";
+import Loading from "../../Loading";
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 const Explore = () => {
-  const { songOfTop } = useContext(CallSongContext);
-  const [indexLocation, setIndexLocation] = useState(0);
-  const [nameCategory, setNameCategory] = useState("Nhạc Trẻ");
-
+  const [loading, setLoading] = useState(true);
+  const [list, setList] = useState();
   const { updateAudio } = useContext(DataContext);
-  
-  const updateCountry = (country) => {
-    const listKeys = Object.keys(songOfTop);
-    const IndexInList = listKeys.findIndex((key) => {
-      return key === country;
-    });
-    if(country ==="top100_VN") setNameCategory("Nhạc Trẻ")
-    if(country ==="top100_AM") setNameCategory("Pop")
-    if(country ==="top100_CA") setNameCategory("Nhạc Hàn")
-    if(country ==="top100_KL") setNameCategory("Không lời")
-    setIndexLocation(IndexInList);
+  const [category, setCategory] = useState("moi-hot");
+  const [key, setKey] = useState();
+  const [keyNormal, setKeyNormal] = useState();
+  const handleCategory = (name) => {
+    setCategory(name);
+    switch (name) {
+      case "moi-hot":
+        setKey("moi-hot");
+        break;
+      case "viet-nam":
+        setKey("nhac-tre");
+        setKeyNormal("Nhạc Trẻ");
+        break;
+      case "au-my":
+        setKey("pop");
+        setKeyNormal("Pop");
+        break;
+      case "chau-a":
+        setKey("han-quoc");
+        setKeyNormal("Nhạc Hàn");
+        break;
+      case "khac":
+        setKey("thieu-nhi");
+        setKeyNormal("Thiếu Nhi");
+        break;
+      default:
+        break;
+    }
   };
-  const handleCategory =(name)=>{
-    setNameCategory(name)
-  }
+  const handleKey = (name) => {
+    setKeyNormal(name);
+    const newKey = name
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(" ", "-")
+      .replace("/", "-");
+    setKey(newKey);
+    if (name === "Electronica/Dance") setKey("dance");
+    if (name === "Blues/Jazz") setKey("blue-jazz");
+  };
+  useEffect(() => {
+    NhacCuaTui.explore({
+      // or "playlist" or "mv"
+      type: "song",
+      key: key,
+      page: 1,
+      pageSize: 36,
+    }).then((data) => {
+      setList(data.data);
+      setLoading(false);
+    });
+    // "3eXsZDj1KmpA"
+  }, [key]);
 
   return (
     <div className="main">
-      <div className="country">
-        <h5 onClick={() => updateCountry("top100_VN")}>Việt Nam</h5>
-        <h5 onClick={() => updateCountry("top100_AM")}>Âu Mỹ</h5>
-        <h5 onClick={() => updateCountry("top100_CA")}>Châu Á</h5>
-        <h5 onClick={() => updateCountry("top100_KL")}>Khác</h5>
-      </div>
-
-      <div className="list-category">
-        {Object.values(songOfTop)[indexLocation]?.map((item, index) => (
-          <h6 key={index} onClick={()=>handleCategory(item.name)}>{item.name}</h6>
-        ))}
-      </div>
-      <Row className="category-child">
-        {Object.values(songOfTop)[indexLocation]?.map((item) =>
-          item.name === nameCategory ? (
-            item.songs.map((child, index) => (
-              <Col xs={12} sm ={6} md={4} lg={3} 
-                key={child.music}
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <div className="location">
+            <h5
+              className={category === "moi-hot" ? "typeActive" : ""}
+              onClick={() => handleCategory("moi-hot")}
+            >
+              Mới & Hot
+            </h5>
+            <h5
+              className={category === "viet-nam" ? "typeActive" : ""}
+              onClick={() => handleCategory("viet-nam")}
+            >
+              Việt Nam
+            </h5>
+            <h5
+              className={category === "au-my" ? "typeActive" : ""}
+              onClick={() => handleCategory("au-my")}
+            >
+              Âu Mỹ
+            </h5>
+            <h5
+              className={category === "chau-a" ? "typeActive" : ""}
+              onClick={() => handleCategory("chau-a")}
+            >
+              Châu Á
+            </h5>
+            <h5
+              className={category === "khac" ? "typeActive" : ""}
+              onClick={() => handleCategory("khac")}
+            >
+              Khác
+            </h5>
+          </div>
+          <div className="country">
+            {ExploreJson.map((explore, index) =>
+              explore.title === category ? (
+                <div className="explore-item" key={index}>
+                  {explore.categories.map((item) => (
+                    <p
+                      className={item.name === keyNormal ? "typeActive" : ""}
+                      onClick={() => handleKey(item.name)}
+                    >
+                      {item.name}
+                    </p>
+                  ))}
+                </div>
+              ) : (
+                ""
+              )
+            )}
+          </div>
+          <Row className="category-child">
+            {list.map((item, index) => (
+              <Col
                 className="category-item"
-                onClick={() => updateAudio(null, item.songs, index)}
+                key={item.key}
+                xs={6}
+                md={4}
+                lg={3}
               >
-                <img src={child.avatar} alt="" />
-                <h6>{child.title}</h6>
-                <p>{child.creator}</p>
+                <div className="item-animation">
+                  {item.thumbnail ? (
+                    <img src={item.thumbnail} alt="" />
+                  ) : (
+                    <img
+                      style={{ maxHeight: 300 }}
+                      src="https://stc-id.nixcdn.com/v12/static/media/default_song_no_cover.a876da66.png"
+                      alt=""
+                    />
+                  )}
+                  <div className="item-animation__mask">
+                    <MoreVertIcon />
+                    <PlayCircleFilledIcon
+                      className="item-animation__mask-play"
+                      onClick={() => updateAudio(null, list, index)}
+                    />
+                  </div>
+                </div>
+                <div className="category-item-title">
+                  <h6>{item.title}</h6>
+                  {item?.artists.map((item, index) =>
+                    index < item?.artists?.length - 1 ? (
+                      <span key={index}>{item.name},</span>
+                    ) : (
+                      <span key={index}>{item.name}</span>
+                    )
+                  )}
+                </div>
               </Col>
-            ))
-          ) : (
-            <></>
-          )
-        )}
-      </Row>
+            ))}
+          </Row>
+        </>
+      )}
       <Footer />
     </div>
   );

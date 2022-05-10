@@ -1,12 +1,12 @@
 import React from "react";
 import Slider from "react-slick";
-import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import NavigateBeforeOutlinedIcon from "@material-ui/icons/NavigateBeforeOutlined";
 import NavigateNextOutlinedIcon from "@material-ui/icons/NavigateNextOutlined";
 function SampleNextArrow(props) {
-  const {  onClick } = props;
+  const { onClick } = props;
   return (
     <div
       className="slick-next pull-right"
@@ -19,7 +19,7 @@ function SampleNextArrow(props) {
 }
 
 function SamplePrevArrow(props) {
-  const {  onClick } = props;
+  const { onClick } = props;
   return (
     <div className="slick-prev pull-left" style={{ left: 0 }} onClick={onClick}>
       <NavigateBeforeOutlinedIcon />
@@ -32,18 +32,31 @@ const SliderItem = (props) => {
   var settings = {
     infinite: false,
     speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
-    initialSlide: 0,
+
+    slidesToShow: 7,
+    slidesToScroll: 7,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
+      {
+        breakpoint: 2450,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 6,
+        },
+      },
+      {
+        breakpoint: 2080,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5,
+        },
+      },
       {
         breakpoint: 1560,
         settings: {
           slidesToShow: 4,
           slidesToScroll: 4,
-          infinite: true,
         },
       },
       {
@@ -51,7 +64,6 @@ const SliderItem = (props) => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          infinite: true,
         },
       },
       {
@@ -71,27 +83,18 @@ const SliderItem = (props) => {
       },
     ],
   };
-
-  return(
-    <div className="slider-item" >
-      <h2> {data.groupName.split("_",1)} </h2>
+  return (
+    <div className="slider-item">
+      <h2> {data.groupName.split("_", 1)} </h2>
       <Slider {...settings}>
-        {data.listPlaylist?.map((child, index) => (
+        {data.listPlaylist.map((child, index) => (
           <header key={index}>
-            <nav className="item">
+            <nav className="item-animation">
               <Link to={"/playlist/" + child.key}>
                 <img src={child.thumbnail} alt="" />
-                <div className="item__mask">
-                  <MoreVertIcon
-                    style={{
-                      position: "absolute",
-                      top: 5,
-                      right: 0,
-                      zIndex: 3,
-                      color: "#fff",
-                    }}
-                  />
-                  <PlayCircleFilledIcon className="item__mask-play" />
+                <div className="item-animation__mask">
+                  <MoreVertIcon />
+                  <PlayCircleFilledIcon className="item-animation__mask-play" />
                 </div>
               </Link>
             </nav>
@@ -102,7 +105,7 @@ const SliderItem = (props) => {
         ))}
       </Slider>
     </div>
-  )
+  );
 };
 
 export default SliderItem;

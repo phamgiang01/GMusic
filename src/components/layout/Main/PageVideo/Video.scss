@@ -1,93 +1,80 @@
-.videoPage{
-  margin:25px;
+.videoPage {
+  margin: 25px;
   display: flex;
   justify-content: space-between;
-  .detail-video{
-    width:68%;
-    video{
-      width:100%;
-      height:auto;
+  .detail-video {
+    width: 68%;
+    video {
+      width: 100%;
+      height: auto;
     }
-    .infor-video{
-      h3{
+    .infor-video {
+      h3 {
         margin: 10px 0 20px 0 !important;
       }
-      img:first-child{
-        left:0;
+      img:first-child {
+        left: 0;
       }
       img {
         position: relative;
-        left:-5px;
+        left: -5px;
         width: 35px;
         height: 35px;
         border-radius: 50%;
-        
       }
     }
   }
-  .list-video{
-    width:30%;
-    
-    &-item{
-     
-    display: flex;
-    flex-direction: column;
-    gap:20px;
-    .video-item{
+  .list-video {
+    width: 30%;
+
+    &-item {
       display: flex;
-      gap:15px;
-      img{
-        width:175px;
-        height:125px;
-        border-radius: 5px;
+      flex-direction: column;
+      gap: 20px;
+      .video-item {
+        display: flex;
+        gap: 15px;
+        img {
+          width: 175px;
+          height: 125px;
+          border-radius: 5px;
+        }
       }
     }
-    }
-    
   }
 }
 @media screen and(max-width:1199px) {
-  .videoPage{
+  .videoPage {
     flex-direction: column;
-    gap:50px;
-    .detail-video{
-      width:100%;
-    }
-    .list-video{
+    gap: 50px;
+    .detail-video {
       width: 100%;
-     
     }
-    
+    .list-video {
+      width: 100%;
+    }
   }
 }
 @media screen and(max-width:575px) {
-  .videoPage{
-    margin:0 !important;
-    .detail-video{
-      .infor-video{
-        img{
-          width:25px;
-          height:25px;
+  .videoPage {
+    margin: 0 !important;
+    .detail-video {
+      .infor-video {
+        img {
+          width: 25px;
+          height: 25px;
         }
       }
     }
-    .list-video{
-     
-      
-      &-item{
-       
-      
-      .video-item{
-       
-        img{
-          width:150px;
-          height:100px;
-          
+    .list-video {
+      &-item {
+        .video-item {
+          img {
+            width: 150px;
+            height: 100px;
+          }
         }
       }
-      }
-      
     }
-    
   }
 }

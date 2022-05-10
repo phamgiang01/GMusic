@@ -1,0 +1,25 @@
+.detailSong {
+  background-image: linear-gradient(#1b2b31, #121212);
+  padding: var(--p-25);
+  &-top {
+    display: flex;
+    gap: 30px;
+    justify-content:flex-start;
+    .infor-song{
+      .name-song{
+        display: flex;
+        gap:15px;
+      }
+    }
+    .artists-song{
+      margin:10px 0;
+      img {
+        width: 30px;
+        height:30px; 
+        border-radius: 50%;
+        margin-right:10px;
+      }
+    }
+  }
+
+}

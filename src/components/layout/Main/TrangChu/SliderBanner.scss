@@ -1,6 +1,9 @@
 
 .slider__fake{
   margin:  var(--p-25) var(--p-25) 60px ;
+  .slick-slider{
+    
+  }
   .slick-next::before{
     display: none;
   }
@@ -32,12 +35,12 @@
 .slick-slide{
   padding:0 !important;
   outline:none;
-
+ 
 }
 .slick-list{
   outline:none;
   width:100%;
-  border-radius:5px;
+  
   left:50%;
   transform: translateX(-50%) !important;
 }

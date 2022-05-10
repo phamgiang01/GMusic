@@ -110,10 +110,17 @@
 @media screen and(min-width:1560px) {
   .menu{
     width:350px;
-    a{
-      padding-top:15px !important; 
-      padding-bottom:15px !important;
+    &-item{
+      padding-top:20px !important; 
+      padding-bottom:20px !important;
     }
+    
+  }
+}
+@media screen and(min-width:2080px) {
+  .menu{
+    width:450px;
+    
     
   }
 }

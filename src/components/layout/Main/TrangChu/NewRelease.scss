@@ -47,7 +47,7 @@
       padding-left: 10px;
       overflow: hidden;
       height: 30px;
-      font-size:14px !important;
+      
     }
     svg{
       font-size:25px !important;
@@ -114,6 +114,7 @@
 }
 @media screen and(min-width:1560px) {
   .new__release {
+   
     margin-top: 50px;
     .produce__song {
       margin-top: 30px;
@@ -123,7 +124,7 @@
         }
       }
     }
-    list__song-release {
+    .list__song-release {
       .song-release {
         img {
           max-width: 150px;

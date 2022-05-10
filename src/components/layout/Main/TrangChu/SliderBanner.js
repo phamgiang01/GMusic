@@ -5,9 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import "./SliderItem.scss";
 import NhacCuaTui from "nhaccuatui-api-full";
 import { Link } from "react-router-dom";
-import { DataContext } from "../../../../context/DataContext";
 import NavigateBeforeOutlinedIcon from "@material-ui/icons/NavigateBeforeOutlined";
 import NavigateNextOutlinedIcon from "@material-ui/icons/NavigateNextOutlined";
+import Loading from "../../Loading";
 function SampleNextArrow(props) {
   const { onClick } = props;
   return (
@@ -31,17 +31,21 @@ function SamplePrevArrow(props) {
 }
 
 const SliderBanner = () => {
-  const { updateAudio } = useContext(DataContext);
+  const [loading, setLoading] = useState(true);
   require("./SliderBanner.scss");
   const [list, setList] = useState();
   useEffect(() => {
-    NhacCuaTui.getHome().then((data) => setList(data.showcase));
+    NhacCuaTui.getHome().then((data) => {
+      setList(data.showcase);
+      setLoading(false);
+    });
   }, []);
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -69,15 +73,45 @@ const SliderBanner = () => {
       },
     ],
   };
+  const toLink = (url) => {
+    //get string after ".com/"
+    
+    const endIIndex = url.indexOf(".html");
+    const newUrl = url.slice(0, endIIndex);
+    const indexKey = newUrl.lastIndexOf(".") +1;
+    return newUrl.slice(indexKey);
+  };
+  const checkSongOrPlaylist = (url) => {
+    //get string after ".com/" : song or playlist
+
+    const index = url.indexOf(".com") + 5;
+    const param = url.slice(index, index + 1);
+    if (param === "b") return 1;
+    return 0;
+  };
   return (
     <div className="slider__fake">
-      <Slider {...settings}>
-        {list?.map((step, index) => (
-          <div key={index}>
-            <img src={step.thumbnail} alt="" />
-          </div>
-        ))}
-      </Slider>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Slider {...settings}>
+          {list.map((step, index) => (
+            <div key={index}>
+              {checkSongOrPlaylist(step.url) ? (
+                <>
+                  <Link to={"/song/" + toLink(step.url)}>
+                    <img src={step.thumbnail} alt="" />
+                  </Link>
+                </>
+              ) : (
+                <Link to={"/playlist/" + toLink(step.url)}>
+                    <img src={step.thumbnail} alt="" />
+                  </Link>
+              )}
+            </div>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 };
